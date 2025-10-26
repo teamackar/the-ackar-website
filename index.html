@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The ackar - Elevate Your Narrative</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ---
+        Root Variables & Global Styles
+        --- */
+        :root {
+            --color-arctic: #D3D1CE;
+            --color-apres-ski: #6C6D74;
+            --color-slopes: #B3B7BA;
+            --color-midnight: #090F15;
+            --color-mountainside: #262E36;
+
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-arctic);
+            color: var(--color-midnight);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ---
+        Layout & Reusable Components
+        --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        [class^="section-"] {
+            padding: 6rem 0;
+        }
+
+        .grid {
+            display: grid;
+            gap: 2.5rem;
+        }
+
+        .grid-two-cols {
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+        }
+
+        .grid-three-cols {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .sub-heading {
+            font-family: var(--font-sans);
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: var(--color-apres-ski);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-nav-cta {
+            border-color: var(--color-slopes);
+            color: var(--color-slopes);
+        }
+
+        .btn-nav-cta:hover {
+            background-color: var(--color-mountainside);
+            border-color: var(--color-mountainside);
+            color: var(--color-arctic);
+        }
+
+        .btn-primary-cta {
+            background-color: var(--color-mountainside);
+            color: var(--color-arctic);
+            border-color: var(--color-mountainside);
+            font-size: 1rem;
+            padding: 1rem 2.5rem;
+        }
+
+        .btn-primary-cta:hover {
+            background-color: var(--color-apres-ski);
+            border-color: var(--color-apres-ski);
+        }
+
+        .btn-secondary-cta {
+            background-color: var(--color-arctic);
+            color: var(--color-midnight);
+            border-color: var(--color-arctic);
+            font-size: 1rem;
+            padding: 1rem 2.5rem;
+        }
+
+        .btn-secondary-cta:hover {
+            background-color: var(--color-slopes);
+            border-color: var(--color-slopes);
+        }
+
+        /* ---
+        1. Navigation Bar
+        --- */
+        .navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-midnight);
+            color: var(--color-arctic);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-menu a {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--color-slopes);
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-arctic);
+        }
+
+        /* Scrolled Nav Style (via JS) */
+        .navbar.scrolled {
+            background-color: rgba(9, 15, 21, 0.95);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        /* ---
+        2. Hero Section
+        --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-arctic);
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-midnight);
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        .hero-content {
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--color-slopes);
+            margin-bottom: 2.5rem;
+        }
+
+        /* ---
+        3. About Section
+        --- */
+        .section-about {
+            background-color: var(--color-arctic);
+        }
+
+        .about-image {
+            width: 100%;
+            height: 100%;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+        }
+
+        .about-content {
+            padding-left: 2rem;
+        }
+
+        /* ---
+        4. Services Section
+        --- */
+        .section-services {
+            background-color: var(--color-mountainside);
+            color: var(--color-arctic);
+        }
+
+        .section-services .section-title {
+            color: var(--color-arctic);
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            border: 1px solid var(--color-apres-ski);
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            background-color: var(--color-midnight);
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--color-slopes);
+            margin-bottom: 1rem;
+            font-family: var(--font-serif);
+        }
+
+        .service-card h3 {
+            color: var(--color-arctic);
+        }
+
+        .service-card p {
+            color: var(--color-slopes);
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        /* ---
+        5. Portfolio Section
+        --- */
+        .section-portfolio .section-title {
+            color: var(--color-midnight);
+            margin-bottom: 4rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+
+        .portfolio-item img {
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(38, 46, 54, 0.9); /* Mountainside 90% */
+            color: var(--color-arctic);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-overlay h3 {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            margin: 0;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item:hover .portfolio-overlay h3 {
+            transform: translateY(0);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ---
+        6. Testimonials Section
+        --- */
+        .section-testimonials {
+            background-color: var(--color-slopes);
+            color: var(--color-midnight);
+        }
+
+        .testimonial-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial-content blockquote {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-style: italic;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 2rem;
+            color: var(--color-midnight);
+        }
+
+        .testimonial-content cite {
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-style: normal;
+            color: var(--color-mountainside);
+        }
+
+        /* ---
+        7. Final CTA Section
+        --- */
+        .section-cta {
+            background-color: var(--color-midnight);
+            color: var(--color-arctic);
+        }
+
+        .section-cta h2 {
+            font-size: 3rem;
+        }
+
+        .section-cta p {
+            font-size: 1.1rem;
+            color: var(--color-slopes);
+            margin-bottom: 2.5rem;
+        }
+
+        /* ---
+        8. Footer
+        --- */
+        .footer {
+            background-color: var(--color-midnight);
+            color: var(--color-apres-ski);
+            padding-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        .footer .grid-three-cols {
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-arctic);
+        }
+
+        .footer-links li,
+        .footer-socials li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a:hover,
+        .footer-socials a:hover {
+            color: var(--color-arctic);
+        }
+
+        .footer-socials {
+            text-align: right;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--color-mountainside);
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        /* ---
+        Responsive Design
+        --- */
+        @media (max-width: 992px) {
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 2rem; }
+
+            .grid-two-cols,
+            .grid-three-cols {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 400px;
+                margin-bottom: 2rem;
+            }
+            
+            .about-content {
+                padding-left: 0;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Hide desktop nav menu */
+            .nav-menu {
+                display: none; 
+                /* Future: Add hamburger menu logic */
+            }
+
+            .btn-nav-cta {
+                font-size: 0.8rem;
+                padding: 0.6rem 1.2rem;
+            }
+
+            h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1rem; }
+            
+            [class^="section-"] {
+                padding: 4rem 0;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-content blockquote {
+                font-size: 1.5rem;
+            }
+
+            .footer .grid-three-cols {
+                text-align: center;
+            }
+
+            .footer-socials {
+                text-align: center;
+                margin-top: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="nav-logo">THE ACKAR</a>
+            <ul class="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">The Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="btn btn-nav-cta">Schedule Consultation</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="video-background">
+            <img 
+            class="w-full h-auto rounded-lg shadow-xl" 
+            src="img/background.jpg" 
+            alt="A descriptive alt text"
+            >
+            </div>
+            <h1>Elevate Your Narrative</h1>
+            <p>Shaping identities and amplifying brands</p>
+            <a href="#services" class="btn btn-primary-cta">Discover Your Presence</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="section-about">
+            <div class="container grid grid-two-cols">
+                <div class="about-image">
+                    <img src="img/transparent-logo.png" alt="Minimalist architectural detail">
+                </div>
+                <div class="about-content">
+                    <span class="sub-heading">THE ACKAR METHOD</span>
+                    <h2>We Don't Just Market Luxury. We Define It.</h2>
+                    <p>The ackar is a strategic partner for brands that command prestige. We understand that luxury is not about volume; it is about resonance. Our curated digital experiences are crafted with precision, targeting high-net-worth audiences and forging connections that are both meaningful and exclusive.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section-services">
+            <div class="container">
+                <h2 class="section-title text-center">Our Bespoke Services</h2>
+                <div class="grid grid-three-cols">
+                    <div class="service-card">
+                        <div class="service-icon">❖</div> 
+                        <h3>Curated Content Creation</h3>
+                        <p>Bespoke photography, videography, and editorial that speaks the language of your exclusive clientele.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">⧉</div>
+                        <h3>Elite Audience Cultivation</h3>
+                        <p>Strategic engagement and high-profile collaborations to build a community, not just a following.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">✧</div>
+                        <h3>Digital Brand Guardianship</h3>
+                        <p>Meticulous management of your brand's digital footprint, ensuring every interaction is flawless.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section-portfolio">
+            <div class="container">
+                <h2 class="section-title text-center">The Digital Atelier</h2>
+                <div class="portfolio-grid">
+                    <a href="#" class="portfolio-item">
+                        <img src="img/22.jpeg" alt="Portfolio piece 2">
+                        <div class="portfolio-overlay">
+                            <h3>Planning</h3>
+                        </div>
+                    </a>
+
+                    <a href="#" class="portfolio-item">
+                        <img src="img/21.jpeg" alt="Portfolio piece 1">
+                        <div class="portfolio-overlay">
+                            <h3>Photo Shoot</h3>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="portfolio-item">
+                        <img src="img/23.jpeg" alt="Portfolio piece 3">
+                        <div class="portfolio-overlay">
+                            <h3>Marketing</h3>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section-testimonials">
+            <div class="container">
+                <div class="testimonial-content">
+                    <blockquote>
+                        "The ackar transformed our digital narrative. Their understanding of the luxury market is simply unparalleled."
+                    </blockquote>
+                    <cite>– Creative Director, [Prestige Watchmaker]</cite>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-cta">
+            <div class="container text-center">
+                <h2>Begin Your Digital Ascent.</h2>
+                <p>Schedule a free private consultation to discuss your brand's future.</p>
+                <a href="https://shorturl.at/qaPy2" class="btn btn-secondary-cta">Schedule Consultation</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container grid grid-three-cols">
+            <div class="footer-col">
+                <a href="#" class="footer-logo">THE ACKAR</a>
+            </div>
+            <div class="footer-col">
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <ul class="footer-socials">
+                    <li><a href="mailto:contact@theackar.com">Email</a></li>
+                    <li><a href="https://instagram.com/theackar">Instagram</a></li>
+                    <li><a href="tel:+919836063021">Phone</a></li>
+                    <li><a href="#">Facebook</a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2025 The ackar. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            
+            // Add 'scrolled' class to navbar after scrolling 50px
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
