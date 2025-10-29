@@ -254,11 +254,12 @@
             height: 100%;
             z-index: -2;
         }
-
-        .video-background video {
+        
+        /* Applied object-fit to the image inside video-background */
+        .video-background img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; 
         }
 
         .hero::after {
@@ -275,6 +276,9 @@
 
         .hero-content {
             animation: fadeIn 1.5s ease-out;
+            /* z-index needed to appear above image */
+            position: relative; 
+            z-index: 2;
         }
 
         @keyframes fadeIn {
@@ -420,10 +424,36 @@
             color: var(--color-midnight);
         }
 
-        .testimonial-content {
+        /* NEW: Slider container */
+        .testimonial-slider {
+            position: relative;
             max-width: 800px;
             margin: 0 auto;
+            overflow: hidden; /* This hides the other slides */
+        }
+
+        /* NEW: Track to hold the slides */
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out; /* Slide animation */
+        }
+
+        /* NEW: Individual slide */
+        .testimonial-slide {
+            flex: 0 0 100%; /* Each slide takes 100% width of the container */
+            width: 100%;
+            padding: 0 1rem; /* Optional: adds spacing if needed */
+        }
+
+        .testimonial-content {
+            /* max-width: 800px; */ /* No longer needed */
+            /* margin: 0 auto; */ /* No longer needed */
             text-align: center;
+            min-height: 250px; /* Gives a consistent height for all slides */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .testimonial-content blockquote {
@@ -442,6 +472,38 @@
             font-style: normal;
             color: var(--color-mountainside);
         }
+
+        /* NEW: Slider Buttons */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(9, 15, 21, 0.3); /* midnight at 30% */
+            color: var(--color-arctic);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .slider-btn:hover {
+            background-color: var(--color-midnight);
+        }
+
+        .slider-btn-prev {
+            left: 10px;
+        }
+
+        .slider-btn-next {
+            right: 10px;
+        }
+
 
         /* ---
         7. Final CTA Section
@@ -566,6 +628,14 @@
                 text-align: center;
                 margin-top: 1.5rem;
             }
+
+            /* NEW: Make slider buttons smaller on mobile */
+            .slider-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 1.2rem;
+                line-height: 30px;
+            }
         }
     </style>
 </head>
@@ -585,14 +655,15 @@
     </nav>
 
     <header class="hero">
-        <div class="hero-content">
-            <div class="video-background">
+        <!-- Moved image to video-background div -->
+        <div class="video-background">
             <img 
-            class="w-full h-auto rounded-lg shadow-xl" 
             src="img/background.jpg" 
             alt="A descriptive alt text"
             >
-            </div>
+        </div>
+        <!-- Content is separate from background -->
+        <div class="hero-content">
             <h1>Elevate Your Narrative</h1>
             <p>Shaping identities and amplifying brands</p>
             <a href="#services" class="btn btn-primary-cta">Discover Your Presence</a>
@@ -659,17 +730,67 @@
                         <div class="portfolio-overlay">
                             <h3>Marketing</h3>
                         </div>
+                    </a> <!-- *** HTML FIX: Added missing closing </a> tag *** -->
                 </div>
             </div>
         </section>
 
         <section id="testimonials" class="section-testimonials">
             <div class="container">
-                <div class="testimonial-content">
-                    <blockquote>
-                        "The ackar transformed our digital narrative. Their understanding of the luxury market is simply unparalleled."
-                    </blockquote>
-                    <cite>– Creative Director, [Prestige Watchmaker]</cite>
+                <!-- New Slider Container -->
+                <div class="testimonial-slider">
+                    <!-- Track to hold all slides -->
+                    <div class="testimonial-track">
+                        <!-- Slide 1 (Original Content) -->
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                <blockquote>
+                                    "Collaborating with The Ackar revolutionized our brand! Their innovative tactics and professional guidance allowed us to soar to new levels on social media. We're absolutely delighted with the outcome!"
+                                </blockquote>
+                                <cite>– Label MK</cite>
+                            </div>
+                        </div>
+                        <!-- Slide 2 (New) -->
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                <blockquote>
+                                    "The Ackar gets it exactly right when it comes to our brand's voice and vision. Their commitment to developing compelling content and handling our social media presence has been exceptional. We could not sing their praises enough!"
+                                </blockquote>
+                                <cite>– Wahda Events</cite>
+                            </div>
+                        </div>
+                        <!-- Slide 3 (New) -->
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                <blockquote>
+                                    "We were amazed by the ROI of our social media campaigns with The Ackar. Their staff's knowledge of paid advertising and content creation has enabled us to boost sales and build brand awareness. An excellent partner!"
+                                </blockquote>
+                                <cite>– Lotus Creation</cite>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                <blockquote>
+                                    "The Ackar has been instrumental in elevating our social media presence and driving engagement with our audience. Their team's creativity, responsiveness, and strategic thinking have made them an invaluable partner for our brand."
+                                </blockquote>
+                                <cite>– Teetopiyaa</cite>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                <blockquote>
+                                    "I had the pleasure of working with The ackar for my skincare brand, and I was blown away by their expertise and dedication. Due to personal reasons, I had to take a break, but I'm eager to collaborate with them again. Their team's knowledge of the industry and passion for delivering results is unmatched. If you're looking for a reliable and talented agency, look no further."
+                                </blockquote>
+                                <cite>– Be Beaut</cite>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slider Controls -->
+                    <button class="slider-btn slider-btn-prev">&larr;</button>
+                    <button class="slider-btn slider-btn-next">&rarr;</button>
                 </div>
             </div>
         </section>
@@ -711,17 +832,103 @@
         </div>
     </footer>
 
+    <!-- 
+        *** JAVASCRIPT MODIFIED ***
+        Added auto-slide functionality
+    -->
     <script>
+        // Navbar scroll logic
         window.addEventListener('scroll', function() {
             const navbar = document.querySelector('.navbar');
-            
-            // Add 'scrolled' class to navbar after scrolling 50px
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
         });
+
+        // --- Testimonial Slider Logic ---
+        // We wrap it in a function to run it
+        const initTestimonialSlider = () => {
+            const track = document.querySelector('.testimonial-track');
+            
+            // Exit if slider elements aren't on the page
+            if (!track) return; 
+
+            const slides = Array.from(track.children);
+            const nextButton = document.querySelector('.slider-btn-next');
+            const prevButton = document.querySelector('.slider-btn-prev');
+
+            // Exit if buttons are missing or there are no slides
+            if (!nextButton || !prevButton || slides.length === 0) return;
+
+            // Hide buttons if only one slide
+            if (slides.length <= 1) {
+                nextButton.style.display = 'none';
+                prevButton.style.display = 'none';
+                return;
+            }
+
+            let slideWidth = slides[0].getBoundingClientRect().width;
+            let currentIndex = 0;
+            let autoSlideInterval; // NEW: Variable to hold our interval
+
+            // Function to move to the target slide
+            const moveToSlide = (targetIndex) => {
+                // Loop around
+                if (targetIndex >= slides.length) {
+                    targetIndex = 0; // Loop to first
+                } else if (targetIndex < 0) {
+                    targetIndex = slides.length - 1; // Loop to last
+                }
+
+                track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
+                currentIndex = targetIndex;
+            };
+
+            // NEW: Function to start/reset the auto-slide
+            const startAutoSlide = () => {
+                clearInterval(autoSlideInterval); // Clear existing interval
+                autoSlideInterval = setInterval(() => {
+                    moveToSlide(currentIndex + 1);
+                }, 5000); // Slides every 5 seconds
+            };
+
+            // Event Listeners for buttons
+            prevButton.addEventListener('click', e => {
+                moveToSlide(currentIndex - 1);
+                startAutoSlide(); // NEW: Reset timer on click
+            });
+
+            nextButton.addEventListener('click', e => {
+                moveToSlide(currentIndex + 1);
+                startAutoSlide(); // NEW: Reset timer on click
+            });
+
+            // Re-calculate slide width on window resize to keep it responsive
+            window.addEventListener('resize', () => {
+                slideWidth = slides[0].getBoundingClientRect().width;
+                
+                // Snap to correct position without animation during resize
+                track.style.transition = 'none'; 
+                track.style.transform = 'translateX(-' + slideWidth * currentIndex + 'px)';
+                
+                // Re-enable animation after a tiny delay
+                // Forcing a reflow is a common trick
+                track.offsetHeight; 
+                track.style.transition = 'transform 0.5s ease-in-out';
+
+                startAutoSlide(); // NEW: Reset timer on resize
+            });
+
+            // NEW: Start the auto-slide on page load
+            startAutoSlide();
+        };
+
+        // Run the slider logic
+        // Since the script is at the end of <body>, the DOM is ready.
+        initTestimonialSlider();
     </script>
 </body>
 </html>
+
