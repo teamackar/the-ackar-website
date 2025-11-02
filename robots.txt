@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block unnecessary system files
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+
+# Sitemap Location
+Sitemap: https://theackar.com/sitemap.xml
