@@ -1,311 +1,1091 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ackar – Elevate Your Narrative</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <!-- ✅ SEO -->
-    <meta name="description" content="The Ackar defines luxury digital branding through curated content creation, elite audience cultivation, and premium brand guardianship." />
-    <link rel="canonical" href="https://theackar.com" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Ackar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@100;200;300;400&display=swap" rel="stylesheet"/>
 
-    <!-- ✅ Open Graph -->
-    <meta property="og:title" content="The Ackar – Elevate Your Narrative" />
-    <meta property="og:description" content="Luxury-focused digital branding & content creation agency elevating brands with elegance and precision." />
-    <meta property="og:image" content="https://theackar.com/img/background.webp" />
-    <meta property="og:url" content="https://theackar.com" />
-    <meta property="og:type" content="website" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <!-- ✅ Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-
-    <!-- ✅ Preload LCP -->
-    <link rel="preload" as="image" href="img/background.webp" />
-
-    <!-- ✅ Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="prepreconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-
-    <!-- ✅ CSS -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- ✅ Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "The Ackar",
-      "url": "https://theackar.com",
-      "logo": "https://theackar.com/img/transparent-logo.webp",
-      "description": "Luxury digital branding agency specializing in curated content creation, audience cultivation and brand guardianship.",
-      "sameAs": [
-        "https://instagram.com/theackar",
-        "https://facebook.com/theackar"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "email": "contact@theackar.com"
-      }
+    :root {
+      --gold:        #b59a6a;
+      --gold-light:  #d4b98a;
+      --ink:         #0a0908;
+      --parchment:   #f5f0e8;
     }
-    </script>
-</head>
 
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--parchment);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 52px;
+      transition: padding .4s, background .4s, backdrop-filter .4s;
+    }
+    header.scrolled {
+      padding: 16px 52px;
+      background: rgba(10,9,8,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(181,154,106,0.12);
+    }
+    .header-brand { display: flex; flex-direction: column; }
+    .header-brand .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 400;
+      letter-spacing: 0.18em; color: #fff;
+    }
+    .header-brand .since {
+      font-size: 0.58rem; font-weight: 200;
+      letter-spacing: 0.32em; color: var(--gold); margin-top: 2px;
+      text-transform: uppercase;
+    }
+    nav { display: flex; gap: 36px; align-items: center; }
+    nav a {
+      font-size: 0.65rem; font-weight: 300;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(245,240,232,0.7); text-decoration: none;
+      transition: color .25s;
+    }
+    nav a:hover { color: var(--gold); }
+    nav a.nav-cta {
+      border: 1px solid rgba(181,154,106,0.5);
+      padding: 9px 22px; color: var(--gold);
+      transition: background .25s, color .25s;
+    }
+    nav a.nav-cta:hover { background: var(--gold); color: var(--ink); }
+    nav a.active { color: var(--gold); }
+
+    /* ══════════════════════════════════════
+       HERO — ORIGINAL WITH PARALLAX
+    ══════════════════════════════════════ */
+    .hero {
+      position: relative;
+      height: 250vh;
+      background: var(--ink);
+    }
+
+    .hero-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero-photo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 200%;
+      object-fit: cover;
+      object-position: center top;
+      transform: translateY(0);
+      filter: brightness(0.75) saturate(1.1);
+      will-change: transform;
+    }
+
+    .hero-tint {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, rgba(10,9,8,0.3) 0%, rgba(10,9,8,0.1) 30%, rgba(10,9,8,0.2) 50%, rgba(10,9,8,0.5) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-text-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: 20;
+      pointer-events: none;
+    }
+    
+    .hero-text-container a, .hero-text-container .scroll-hint {
+      pointer-events: auto;
+    }
+
+    .hero-tagline {
+      position: absolute;
+      top: 30%;
+      left: 5%;
+      max-width: 450px;
+      color: rgba(245,240,232,0.95);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-big-text {
+      position: absolute;
+      top: 134%;
+      left: 5%;
+      transform: translateY(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(5rem, 14vw, 12rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-big-text span {
+      display: block;
+      margin-bottom: -0.1em;
+    }
+
+    .hero-desc {
+      position: absolute;
+      top: 208%;
+      left: 5%;
+      max-width: 500px;
+      color: rgba(245,240,232,0.9);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .hero-studio-link {
+      position: absolute;
+      bottom: -140%;
+      left: 5%;
+    }
+    .hero-studio-link a {
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 4px;
+      transition: all 0.3s;
+    }
+    .hero-studio-link a:hover {
+      color: var(--gold-light);
+      border-color: var(--gold-light);
+    }
+
+    .hero-links {
+      position: absolute;
+      bottom: -140%;
+      right: 5%;
+      text-align: right;
+    }
+    .hero-links a {
+      display: block;
+      color: rgba(245,240,232,0.6);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+    }
+    .hero-links a:hover { color: var(--gold); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(245,240,232,0.4);
+      font-size: 0.6rem;
+      font-weight: 200;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .scroll-hint::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; height: 40px; }
+      50% { opacity: 1; height: 55px; }
+    }
+
+    /* ══════════════════════════════════════
+       OUR WORK SECTION TITLE
+    ══════════════════════════════════════ */
+    .our-work-title {
+      padding: 80px 52px 40px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .our-work-title.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .our-work-title h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      color: #fff;
+    }
+    .our-work-title h2 span {
+      color: var(--gold);
+      font-style: italic;
+    }
+    .our-work-title .line {
+      width: 80px;
+      height: 1px;
+      background: var(--gold);
+      margin: 20px auto 0;
+      opacity: 0.5;
+    }
+
+    /* ══════════════════════════════════════
+       HORIZONTAL SCROLL PORTFOLIO
+    ══════════════════════════════════════ */
+    .portfolio-horizontal-section {
+      position: relative;
+      background: var(--ink);
+    }
+
+    .sticky-container {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .horizontal-track {
+      display: flex;
+      gap: 48px;
+      padding: 0 52px;
+      will-change: transform;
+      align-items: center;
+    }
+
+    /* ══════════════════════════════════════
+       WORK CARD WITH CLIPPED TOP-LEFT CORNER
+    ══════════════════════════════════════ */
+    .work-card {
+      position: relative;
+      flex-shrink: 0;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      overflow: hidden;
+      /* Clipped corner on top-left using clip-path */
+      clip-path: polygon(40px 0, 100% 0, 100% 100%, 0 100%, 0 40px);
+    }
+
+    .work-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ══════════════════════════════════════
+       REDUCED HEIGHTS - Cards that were too tall
+    ══════════════════════════════════════ */
+    /* Card 1 - was 480px */
+    .work-card:nth-child(1) { width: 380px; height: 420px; }
+    
+    /* Card 2 - landscape, good */
+    .work-card:nth-child(2) { width: 520px; height: 380px; margin-top: 30px; }
+    
+    /* Card 3 - was 560px (too tall) */
+    .work-card:nth-child(3) { width: 320px; height: 460px; margin-top: -20px; }
+    
+    /* Card 4 - was 500px */
+    .work-card:nth-child(4) { width: 450px; height: 440px; }
+    
+    /* Card 5 - was 520px (too tall) */
+    .work-card:nth-child(5) { width: 360px; height: 440px; margin-top: 20px; }
+    
+    /* Card 6 - landscape, good */
+    .work-card:nth-child(6) { width: 580px; height: 360px; margin-top: 40px; }
+    
+    /* Card 7 - was 540px (too tall) */
+    .work-card:nth-child(7) { width: 340px; height: 460px; margin-top: -30px; }
+    
+    /* Card 8 - was 460px */
+    .work-card:nth-child(8) { width: 420px; height: 400px; }
+    
+    /* Card 9 - was 500px */
+    .work-card:nth-child(9) { width: 400px; height: 420px; margin-top: 10px; }
+    
+    /* Card 10 - was 440px */
+    .work-card:nth-child(10) { width: 480px; height: 400px; margin-top: 20px; }
+
+    .card-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(.16,1,.3,1), filter 0.5s;
+
+    }
+
+    .work-card:hover .card-photo img {
+      transform: scale(1.07);
+      filter: saturate(0.9) brightness(0.65);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 30%, rgba(10,9,8,0.9) 100%);
+      transition: background 0.5s;
+      z-index: 1;
+    }
+
+    .work-card:hover .card-overlay {
+      background: linear-gradient(180deg, rgba(10,9,8,0.2) 0%, rgba(10,9,8,0.92) 100%);
+    }
+
+    .card-glass {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      opacity: 0;
+      pointer-events: none;
+      background: rgba(255,255,255,0.035);
+      backdrop-filter: blur(1.5px);
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: opacity 0.4s;
+    }
+
+    .work-card:hover .card-glass { opacity: 1; }
+
+    .card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px 28px 26px;
+    }
+
+    .card-tag {
+      font-size: 0.52rem;
+      font-weight: 200;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .35s .05s, transform .35s .05s;
+    }
+
+    .work-card:hover .card-tag { opacity: 1; transform: none; }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 1.5vw, 1.5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: #fff;
+    }
+
+    .card-sub {
+      font-size: 0.55rem;
+      font-weight: 200;
+      letter-spacing: 0.18em;
+      color: rgba(245,240,232,0.5);
+      margin-top: 6px;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .35s .1s, transform .35s .1s;
+    }
+
+    .work-card:hover .card-sub { opacity: 1; transform: none; }
+
+    .card-arrow {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      z-index: 4;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(181,154,106,0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity .3s, transform .3s;
+    }
+
+    .work-card:hover .card-arrow { opacity: 1; transform: scale(1); }
+
+    .card-num {
+      position: absolute;
+      top: 22px;
+      left: 24px;
+      z-index: 4;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ══════════════════════════════════════
+       STATEMENT & REST
+    ══════════════════════════════════════ */
+    .statement-section {
+      padding: 100px 52px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      border-top: 1px solid rgba(181,154,106,0.08);
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .7s, transform .7s;
+    }
+    .statement-section.visible { opacity: 1; transform: none; }
+
+    .statement-left .section-label-wrap {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
+    }
+    .section-label {
+      font-size: 0.58rem; font-weight: 200;
+      letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .section-label-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, rgba(181,154,106,0.4), transparent);
+    }
+    .statement-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 300; line-height: 1.1;
+      letter-spacing: 0.01em; color: #fff;
+    }
+    .statement-heading em { font-style: italic; color: var(--gold-light); }
+
+    .statement-right p {
+      font-size: 0.78rem; font-weight: 300;
+      line-height: 1.9; color: rgba(245,240,232,0.55);
+      letter-spacing: 0.02em; margin-bottom: 20px;
+    }
+    .statement-cta {
+      display: inline-flex; align-items: center; gap: 14px;
+      font-size: 0.6rem; font-weight: 200;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none; margin-top: 16px;
+      border-bottom: 1px solid rgba(181,154,106,0.35);
+      padding-bottom: 6px;
+      transition: gap .3s, color .3s;
+    }
+    .statement-cta:hover { gap: 22px; color: var(--gold-light); }
+
+    .recognition-bar {
+      padding: 56px 52px;
+      border-top: 1px solid rgba(181,154,106,0.08);
+      border-bottom: 1px solid rgba(181,154,106,0.08);
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow: hidden;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .7s, transform .7s;
+    }
+    .recognition-bar.visible { opacity: 1; transform: none; }
+    .rec-item {
+      flex: 1; text-align: center;
+      padding: 0 24px;
+      position: relative;
+    }
+    .rec-item + .rec-item::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 1px; height: 40px;
+      background: rgba(181,154,106,0.2);
+    }
+    .rec-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 300;
+      color: rgba(255,255,255,0.12); line-height: 1;
+      display: block;
+    }
+    .rec-label {
+      font-size: 0.58rem; font-weight: 200;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-top: 8px; display: block;
+    }
+
+    footer {
+      padding: 56px 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      border-top: 1px solid rgba(181,154,106,0.1);
+    }
+    .footer-brand { text-align: center; }
+    .footer-brand .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 400;
+      letter-spacing: 0.18em; color: #fff;
+    }
+    .footer-brand .since {
+      font-size: 0.56rem; font-weight: 200;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--gold); margin-top: 4px;
+    }
+    .footer-links { display: flex; gap: 32px; }
+    .footer-links a {
+      font-size: 0.58rem; font-weight: 200;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(245,240,232,0.4); text-decoration: none;
+      transition: color .25s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      font-size: 0.52rem; font-weight: 200;
+      letter-spacing: 0.18em; color: rgba(245,240,232,0.2);
+    }
+
+    @media (max-width: 900px) {
+      header { padding: 22px 28px; }
+      header.scrolled { padding: 14px 28px; }
+      nav { gap: 20px; }
+      .hero-tagline { font-size: 0.9rem; max-width: 300px; top: 12%; }
+      .hero-big-text { 
+        font-size: clamp(3.5rem, 12vw, 7rem); 
+        line-height: 0.9;
+        top: 45%;
+      }
+      .hero-desc {
+        font-size: 0.95rem;
+        max-width: 90%;
+        top: 52%;
+      }
+      .horizontal-track { padding: 0 28px; gap: 24px; }
+      .work-card:nth-child(n) { width: 280px !important; height: 340px !important; margin-top: 0 !important; }
+      .statement-section { grid-template-columns: 1fr; padding: 60px 28px; gap: 40px; }
+      .recognition-bar { padding: 40px 28px; flex-wrap: wrap; gap: 20px; }
+      .our-work-title { padding: 60px 28px 30px; }
+    }
+ 
+
+.our-work-title h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: 160px;        /* bada size */
+  font-weight: 400;        /* bold nahi, clean */
+  letter-spacing: -4px;    /* tight like screenshot */
+  line-height: 0.9;
+  color: #ffffff;
+}
+.browse-all {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.browse-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s;
+  font-family: 'Inter', sans-serif;
+}
+
+.browse-link:hover {
+  color: #aaaaaa;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .browse-all {
+    margin-top: 72px;
+  }
+}
+
+@media (max-width: 576px) {
+  .browse-all {
+    margin-top: 48px;
+  }
+  
+  .browse-link {
+    font-size: 12px;
+    gap: 6px;
+  }
+  
+  .dot {
+    width: 5px;
+    height: 5px;
+  }
+}
+  </style>
+</head>
 <body>
 
-    <nav class="navbar">
-        <div class="container">
-            <a href="/" class="nav-logo">THE ACKAR</a>
-            <ul class="nav-menu">
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">The Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <a href="#contact" class="btn btn-nav-cta">Schedule Consultation</a>
-        </div>
+  <header id="header">
+    <div class="header-brand">
+      <span class="name">THE ACKAR</span>
+      <span class="since">CALCUTTA</span>
+    </div>
+    <nav>
+      <a href="#">What we Do</a>
+      <a href="#">Our Work</a>
+      <a href="#">Testimonials</a>
+      <a href="#" class="active">Philosophy</a>
+      <a href="#" class="nav-cta">Contact Us</a>
     </nav>
+  </header>
 
-    <header class="hero">
-        <div class="video-background">
-            <picture>
-                <source srcset="img/background.webp" type="image/webp">
-                <img src="img/background.jpg" alt="Luxury backdrop representing premium branding">
-            </picture>
+  <!-- ORIGINAL HERO SECTION -->
+  <section class="hero" id="heroSection">
+    <div class="hero-sticky">
+      <div class="hero-photo">
+        <img src="img/hero_cool.png" alt="The Ackar" id="heroImage">
+      </div>
+      <div class="hero-tint"></div>
+    </div>
+    
+    <div class="hero-text-container">
+      <p class="hero-tagline">
+        Global digital design studio partnering with brands and businesses that create exceptional experiences where people live, work, and unwind.
+      </p>
+
+      <div class="hero-big-text">
+        <span>Digital</span>
+        <span>Design</span>
+        <span>Experience</span>
+      </div>
+
+      <div class="hero-desc">
+        We help experience-driven companies thrive by making their audience feel the refined intricacies of their brand and product in the digital space. Unforgettable journeys start with a click.
+      </div>
+
+      <div class="hero-studio-link">
+        <a href="#">The Studio</a>
+      </div>
+
+      <div class="hero-links">
+        <a href="#">Work</a>
+        <a href="#">Studio</a>
+        <a href="#">News</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <div class="scroll-hint">Scroll to explore</div>
+    </div>
+  </section>
+
+  <!-- OUR WORK TITLE - instead of filter bar -->
+  <div class="our-work-title reveal-item">
+    <h1>Our Work</h1>
+ 
+  </div>
+
+  <!-- HORIZONTAL SCROLL PORTFOLIO -->
+  <div class="portfolio-horizontal-section" id="horizontalSection">
+    <div class="sticky-container">
+      <div class="horizontal-track" id="horizontalTrack">
+        
+        <!-- Card 1 -->
+        <div class="work-card reveal-card">
+          <div class="card-photo">
+            <img src="img1/1I2A4810.jpeg" alt="Château Margaux">
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-glass"></div>
+          <div class="card-num">01</div>
+          <div class="card-content">
+            <div class="card-tag">Bespoke Curation · 2023</div>
+            <h3 class="card-title">Château Margaux<br/>Private Reserve</h3>
+            <div class="card-sub">Bordeaux, France — Cellar Acquisition</div>
+          </div>
+          <div class="card-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1"/></svg></div>
         </div>
 
-        <div class="hero-content">
-            <h1>Elevate Your Narrative</h1>
-            <p>Shaping identities and amplifying luxury brands</p>
-            <a href="#services" class="btn btn-primary-cta">Discover Your Presence</a>
-        </div>
-    </header>
-
-    <main>
-        <section id="about" class="section-about">
-            <div class="container grid grid-two-cols">
-                <div class="about-image">
-                    <img src="img/transparent-logo.webp" loading="lazy" alt="The Ackar emblem">
-                </div>
-
-                <div class="about-content">
-                    <span class="sub-heading">THE ACKAR METHOD</span>
-                    <h2>We Don’t Just Market Luxury. We Define It.</h2>
-                    <p>The Ackar is a strategic partner for brands that command prestige. We craft digital experiences rooted in exclusivity, precision and emotional storytelling — built for audiences who expect refinement.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="services" class="section-services">
-            <div class="container">
-                <h2 class="section-title text-center">Our Bespoke Services</h2>
-                <div class="grid grid-three-cols">
-
-                    <div class="service-card">
-                        <div class="service-icon">❖</div>
-                        <h3>Curated Content Creation</h3>
-                        <p>Bespoke photography, videography and editorial built for discerning audiences.</p>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">⧉</div>
-                        <h3>Elite Audience Cultivation</h3>
-                        <p>Strategic collaborations, influencer relations and community building.</p>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">✧</div>
-                        <h3>Digital Brand Guardianship</h3>
-                        <p>Flawless representation of your brand’s identity across all digital touchpoints.</p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section id="portfolio" class="section-portfolio">
-            <div class="container">
-                <h2 class="section-title text-center">The Digital Atelier</h2>
-
-                <div class="portfolio-grid">
-                    <a href="#" class="portfolio-item">
-                        <img src="img/22.webp" loading="lazy" alt="Brand planning session">
-                        <div class="portfolio-overlay"><h3>Planning</h3></div>
-                    </a>
-
-                    <a href="#" class="portfolio-item">
-                        <img src="img/21.webp" loading="lazy" alt="Editorial shoot for luxury brand">
-                        <div class="portfolio-overlay"><h3>Photo Shoot</h3></div>
-                    </a>
-
-                    <a href="#" class="portfolio-item">
-                        <img src="img/23.webp" loading="lazy" alt="Marketing campaign execution">
-                        <div class="portfolio-overlay"><h3>Marketing</h3></div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ✅ TESTIMONIALS -->
-        <section id="testimonials" class="section-testimonials">
-            <div class="container">
-
-                <h2 class="section-title text-center">Voices That Define Excellence</h2>
-
-                <div class="testimonial-slider">
-                    <div class="testimonial-track">
-
-                        <div class="testimonial-slide">
-                            <div class="testimonial-content">
-                                <blockquote>
-                                    “Collaborating with The Ackar revolutionized our brand. Their strategy took our engagement to a world-class level.”
-                                </blockquote>
-                                <cite>— Label MK</cite>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-slide">
-                            <div class="testimonial-content">
-                                <blockquote>
-                                    “Their understanding of premium content and growth strategy is unmatched.”
-                                </blockquote>
-                                <cite>— Wahda Events</cite>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-slide">
-                            <div class="testimonial-content">
-                                <blockquote>
-                                    “We saw real ROI. Higher sales, higher conversions, higher brand value.”
-                                </blockquote>
-                                <cite>— Lotus Creation</cite>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-slide">
-                            <div class="testimonial-content">
-                                <blockquote>
-                                    “Creative, reliable and results-driven. The Ackar has been crucial to our digital growth.”
-                                </blockquote>
-                                <cite>— Teetopiyaa</cite>
-                            </div>
-                        </div>
-
-                        <div class="testimonial-slide">
-                            <div class="testimonial-content">
-                                <blockquote>
-                                    “A rare agency that blends aesthetic excellence with business impact. We will work with them again.”
-                                </blockquote>
-                                <cite>— Be Beaut</cite>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <button class="slider-btn slider-btn-prev">&#8249;</button>
-                    <button class="slider-btn slider-btn-next">&#8250;</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ✅ FAQ (SEO Boost) -->
-        <section id="faq" class="section-about">
-            <div class="container">
-                <h2 class="text-center" style="margin-bottom:2rem;">Frequently Asked Questions</h2>
-
-                <div class="faq-item">
-                    <h3>What services does The Ackar provide?</h3>
-                    <p>We specialize in content creation, audience cultivation, and refined brand guardianship for premium brands.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>Why do luxury brands choose The Ackar?</h3>
-                    <p>We understand exclusivity, visual perception, and luxury purchasing psychology — and we translate that into content and growth.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>How can I schedule a private consultation?</h3>
-                    <p>Visit the <a href="#contact">contact section</a> and choose a preferred time.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="section-cta">
-            <div class="container text-center">
-                <h2>Begin Your Digital Ascent.</h2>
-                <p>Schedule a free private consultation to discuss your brand’s future.</p>
-                <a href="https://shorturl.at/qaPy2" class="btn btn-secondary-cta">Schedule Consultation</a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container grid grid-three-cols">
-            <div class="footer-col">
-                <a href="/" class="footer-logo">THE ACKAR</a>
-            </div>
-
-            <div class="footer-col">
-                <ul class="footer-links">
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="terms-of-service.html">Terms of Service</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <ul class="footer-socials">
-                    <li><a href="mailto:contact@theackar.com">Email</a></li>
-                    <li><a href="https://instagram.com/theackar">Instagram</a></li>
-                    <li><a href="tel:+919836063021">Phone</a></li>
-                    <li><a href="#">Facebook</a></li>
-                </ul>
-            </div>
+        <!-- Card 2 -->
+        <div class="work-card reveal-card">
+          <div class="card-photo">
+            <img src="img1/505150809_17842929930513364_4420399923360719973_n.webp.jpg" alt="The Raffles">
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-glass"></div>
+          <div class="card-num">02</div>
+          <div class="card-content">
+            <div class="card-tag">Heritage Advisory · 2022</div>
+            <h3 class="card-title">The Raffles<br/>Restoration</h3>
+            <div class="card-sub">Singapore — Architectural Heritage</div>
+          </div>
+          <div class="card-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1"/></svg></div>
         </div>
 
-        <div class="footer-bottom">
-            <div class="container">
-                <p>© 2025 The Ackar. All Rights Reserved.</p>
-            </div>
+        <!-- Card 3 -->
+        <div class="work-card reveal-card">
+          <div class="card-photo">
+            <img src="img1/504194433_17842123113513364_2333854766508511936_n.jpg" alt="Monegasque Estate">
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-glass"></div>
+          <div class="card-num">03</div>
+          <div class="card-content">
+            <div class="card-tag">Private Collections · 2024</div>
+            <h3 class="card-title">Monegasque<br/>Estate</h3>
+            <div class="card-sub">Monaco — Interior Acquisition</div>
+          </div>
+          <div class="card-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1"/></svg></div>
         </div>
-    </footer>
 
-    <!-- ✅ JS: Navbar + Testimonials -->
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        <!-- Card 4 -->
+        <div class="work-card reveal-card">
+          <div class="card-photo">
+            <img src="img1/650996412_18073444490448191_9156163636640148126_n.jpg" alt="Al Maktoum">
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-glass"></div>
+          <div class="card-num">04</div>
+          <div class="card-content">
+            <div class="card-tag">Bespoke Curation · 2023</div>
+            <h3 class="card-title">Al Maktoum<br/>Commission</h3>
+            <div class="card-sub">Dubai — Jewellery & Timepiece</div>
+          </div>
+          <div class="card-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1"/></svg></div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="work-card reveal-card">
+          <div class="card-photo">
+            <img src="img1/658846598_17890042800452166_7878044956157336186_n.jpg" alt="Venetian Palazzo">
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-glass"></div>
+          <div class="card-num">05</div>
+          <div class="card-content">
+            <div class="card-tag">Heritage Advisory · 2021</div>
+            <h3 class="card-title">Venetian<br/>Palazzo</h3>
+            <div class="card-sub">Venice, Italy — Archival Research</div>
+          </div>
+          <div class="card-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1"/></svg></div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="work-card reveal-card">
+          <div class="card-photo">
+            <img src="img1/Images-77.jpeg" alt="Geneva Provenance">
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-glass"></div>
+          <div class="card-num">06</div>
+          <div class="card-content">
+            <div class="card-tag">Private Collections · 2024</div>
+            <h3 class="card-title">The Geneva<br/>Provenance</h3>
+            <div class="card-sub">Geneva, Switzerland — Watch Archive</div>
+          </div>
+          <div class="card-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1"/></svg></div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="work-card reveal-card">
+          <div class="card-photo">
+            <img src="img1/574397617_18328449250214292_2129764446262486499_n.jpg" alt="Riviera Villa">
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-glass"></div>
+          <div class="card-num">07</div>
+          <div class="card-content">
+            <div class="card-tag">Architecture · 2022</div>
+            <h3 class="card-title">Riviera Villa</h3>
+            <div class="card-sub">Côte d'Azur, France — Full Estate Curation</div>
+          </div>
+          <div class="card-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1"/></svg></div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="work-card reveal-card">
+          <div class="card-photo">
+            <img src="img1/657972938_18307518268273450_6253777903897740171_n.jpg" alt="Kyoto Ryokan">
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-glass"></div>
+          <div class="card-num">08</div>
+          <div class="card-content">
+            <div class="card-tag">Bespoke Curation · 2020</div>
+            <h3 class="card-title">Kyoto Ryokan<br/>Collection</h3>
+            <div class="card-sub">Kyoto, Japan — Cultural Artefacts</div>
+          </div>
+          <div class="card-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1"/></svg></div>
+        </div>
+
+        <!-- Card 9 -->
+        <div class="work-card reveal-card">
+          <div class="card-photo">
+            <img src="img1/SDP_9166.jpg" alt="Beirut Archive">
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-glass"></div>
+          <div class="card-num">09</div>
+          <div class="card-content">
+            <div class="card-tag">Heritage · 2019</div>
+            <h3 class="card-title">Beirut<br/>Archive</h3>
+            <div class="card-sub">Lebanon — Origin Study</div>
+          </div>
+          <div class="card-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1"/></svg></div>
+        </div>
+
+        <!-- Card 10 -->
+        <div class="work-card reveal-card">
+          <div class="card-photo">
+            <img src="img1/621127806_17871768228513364_1982908322931527573_n.webp" alt="New Delhi Residency">
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-glass"></div>
+          <div class="card-num">10</div>
+          <div class="card-content">
+            <div class="card-tag">Private · 2024</div>
+            <h3 class="card-title">New Delhi<br/>Residency</h3>
+            <div class="card-sub">India — Interior Commission</div>
+          </div>
+          <div class="card-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1"/></svg></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+      <div class="browse-all">
+        <a href="ourwork.html" class="browse-link">
+          <span class="dot"></span>
+          Browse all work
+        </a>
+      </div>
+<br>
+<br>
+<br>
+  <!-- STATEMENT SECTION -->
+  <section class="statement-section reveal-item">
+    <div class="statement-left">
+      <div class="section-label-wrap">
+        <span class="section-label">Philosophy</span>
+        <div class="section-label-line"></div>
+      </div>
+      <h2 class="statement-heading">
+        Every commission<br/>is a <em>conversation</em><br/>with time.
+      </h2>
+    </div>
+    <div class="statement-right">
+      <p>We do not measure our work in volume. We measure it in the clarity with which each project reflects the values, history, and ambition of those we serve. The Ackar has never taken a commission for its own sake — only when there is a story worth telling, and a standard worth upholding.</p>
+      <p>From private estates in Monaco to cultural archives in Beirut, our portfolio is a map of discernment — drawn across continents, but never diluted by distance.</p>
+      <a href="#" class="statement-cta">
+        Begin a Conversation
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="#b59a6a" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- RECOGNITION BAR -->
+  <div class="recognition-bar reveal-item">
+    <div class="rec-item"><span class="rec-num">48</span><span class="rec-label">Completed Commissions</span></div>
+    <div class="rec-item"><span class="rec-num">22</span><span class="rec-label">Countries</span></div>
+    <div class="rec-item"><span class="rec-num">44+</span><span class="rec-label">Years of Practice</span></div>
+    <div class="rec-item"><span class="rec-num">3</span><span class="rec-label">Generations</span></div>
+    <div class="rec-item"><span class="rec-num">1</span><span class="rec-label">Unbroken Standard</span></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <div class="name">THE ACKAR</div>
+      <div class="since">CALCUTTA</div>
+    </div>
+    <div class="footer-links">
+      <a href="#">About</a>
+      <a href="#">What We Do</a>
+      <a href="#">Philosophy</a>
+      <a href="#">Our Work</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-copy">© 2026 The Ackar. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Header scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Hero parallax
+    const heroImage = document.getElementById('heroImage');
+    const heroSection = document.getElementById('heroSection');
+    
+    function updateParallax() {
+      const scrollY = window.scrollY;
+      const heroHeight = heroSection.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const maxScroll = heroHeight - windowHeight;
+      const progress = Math.min(scrollY / maxScroll, 1);
+      const moveUp = progress * 50;
+      heroImage.style.transform = `translateY(-${moveUp}%)`;
+    }
+    
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateParallax();
+          ticking = false;
         });
+        ticking = true;
+      }
+    });
+    updateParallax();
 
-        // Testimonials slider
-        const track = document.querySelector('.testimonial-track');
-        const slides = Array.from(track.children);
-        const prevButton = document.querySelector('.slider-btn-prev');
-        const nextButton = document.querySelector('.slider-btn-next');
+    // Reveal sections
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal-item').forEach(el => revealObs.observe(el));
 
-        let index = 0;
-
-        function updateSlidePosition() {
-            track.style.transform = `translateX(-${index * 100}%)`;
+    // Reveal cards
+    const cardObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          cardObs.unobserve(e.target);
         }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.work-card').forEach(card => cardObs.observe(card));
 
-        prevButton.addEventListener('click', () => {
-            index = (index === 0) ? slides.length - 1 : index - 1;
-            updateSlidePosition();
-        });
-
-        nextButton.addEventListener('click', () => {
-            index = (index === slides.length - 1) ? 0 : index + 1;
-            updateSlidePosition();
-        });
-
-        // Autoplay
-        setInterval(() => {
-            index = (index === slides.length - 1) ? 0 : index + 1;
-            updateSlidePosition();
-        }, 5000);
-    </script>
-
+    // HORIZONTAL SCROLL - Vertical scroll controls horizontal movement
+    const horizontalSection = document.getElementById('horizontalSection');
+    const horizontalTrack = document.getElementById('horizontalTrack');
+    
+    function updateSectionHeight() {
+      if (!horizontalTrack || !horizontalSection) return;
+      
+      const trackWidth = horizontalTrack.scrollWidth;
+      const containerWidth = window.innerWidth;
+      const maxScroll = trackWidth - containerWidth;
+      
+      const scrollDistance = maxScroll * 0.5;
+      const sectionHeight = Math.max(80, scrollDistance);
+      
+      horizontalSection.style.height = `${sectionHeight}vh`;
+      
+      return maxScroll;
+    }
+    
+    let maxScroll = 0;
+    let targetX = 0;
+    let currentX = 0;
+    let animationFrame = null;
+    
+    function updateHorizontalScroll() {
+      if (!horizontalSection || !horizontalTrack) return;
+      
+      const scrollY = window.scrollY;
+      const sectionTop = horizontalSection.offsetTop;
+      const sectionHeight = horizontalSection.offsetHeight;
+      const windowHeight = window.innerHeight;
+      
+      let progress = 0;
+      
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        progress = (scrollY - sectionTop) / (sectionHeight - windowHeight);
+        progress = Math.min(Math.max(progress, 0), 1);
+      } else if (scrollY >= sectionTop + sectionHeight) {
+        progress = 1;
+      }
+      
+      targetX = -maxScroll * progress;
+      
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      
+      function animate() {
+        currentX = currentX + (targetX - currentX) * 0.25;
+        horizontalTrack.style.transform = `translateX(${currentX}px)`;
+        
+        if (Math.abs(targetX - currentX) > 0.5) {
+          animationFrame = requestAnimationFrame(animate);
+        } else {
+          horizontalTrack.style.transform = `translateX(${targetX}px)`;
+          currentX = targetX;
+          animationFrame = null;
+        }
+      }
+      
+      animate();
+    }
+    
+    function init() {
+      maxScroll = updateSectionHeight();
+      updateHorizontalScroll();
+    }
+    
+    window.addEventListener('scroll', () => {
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      animationFrame = requestAnimationFrame(updateHorizontalScroll);
+    });
+    window.addEventListener('resize', () => {
+      maxScroll = updateSectionHeight();
+      updateHorizontalScroll();
+    });
+    
+    setTimeout(init, 100);
+  </script>
 </body>
 </html>
