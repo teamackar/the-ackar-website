@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Net Zero — Industry Intelligence Report 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ═══════════════════════════════════════
+     THE ACKAR COLOR PALETTE
+     Deep blacks · Warm creams · Gold accent
+  ═══════════════════════════════════════ */
+  :root {
+    --bg:            #0c0c0b;
+    --bg-card:       #141413;
+    --bg-raise:      #1a1a18;
+    --bg-lift:       #222220;
+    --bg-hover:      #262624;
+
+    --cream:         #e8e2d4;
+    --cream-dim:     #b8b09e;
+    --cream-faint:   #726e63;
+    --cream-ghost:   #3e3c37;
+
+    --gold:          #c4a35a;
+    --gold-bright:   #d4b870;
+    --gold-dim:      #8a6e35;
+    --gold-pale:     rgba(196, 163, 90, 0.10);
+    --gold-glow:     rgba(196, 163, 90, 0.05);
+
+    --sand:          #9e8c6e;
+    --rust-muted:    #c47855;
+    --teal-muted:    #5ab8a5;
+
+    --border:        rgba(232, 226, 212, 0.07);
+    --border-mid:    rgba(232, 226, 212, 0.13);
+    --border-strong: rgba(196, 163, 90, 0.22);
+    --border-gold:   rgba(196, 163, 90, 0.45);
+
+    --shadow-sm:  0 2px 16px rgba(0,0,0,0.45);
+    --shadow-md:  0 8px 36px rgba(0,0,0,0.55);
+    --shadow-lg:  0 20px 64px rgba(0,0,0,0.65);
+
+    --r:    8px;
+    --r-sm: 4px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--cream);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.55;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(12, 12, 11, 0.90);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 54px;
+  }
+
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cream-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+  .nav-brand:hover { color: var(--gold); }
+
+  .nav-links { display: flex; gap: 0; list-style: none; }
+  .nav-links a {
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    text-decoration: none;
+    padding: 0 13px;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--gold);
+    border: 1px solid var(--border-gold);
+    padding: 3px 11px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 80px 2.5rem 5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 5rem 0 3.5rem;
+    border-bottom: 1px solid var(--border-mid);
+    margin-bottom: 4rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--border-gold);
+    padding: 4px 14px;
+    border-radius: 2px;
+  }
+
+  .hero-date {
+    font-size: 12px;
+    color: var(--cream-faint);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 6.5vw, 64px);
+    font-weight: 600;
+    line-height: 1.02;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero h1 em {
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: var(--cream-dim);
+    max-width: 520px;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2.5rem;
+  }
+
+  .hero-pill {
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: 0.07em;
+    padding: 5px 14px;
+    border-radius: 2px;
+    background: var(--bg-raise);
+    border: 1px solid var(--border-mid);
+    color: var(--cream-faint);
+    text-transform: uppercase;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(22px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+  .section:nth-child(1){animation-delay:.1s}
+  .section:nth-child(2){animation-delay:.2s}
+  .section:nth-child(3){animation-delay:.3s}
+  .section:nth-child(4){animation-delay:.4s}
+  .section:nth-child(5){animation-delay:.5s}
+  .section:nth-child(6){animation-delay:.6s}
+  .section:nth-child(7){animation-delay:.7s}
+  .section:nth-child(8){animation-delay:.8s}
+
+  @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── STAT GRID ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+    gap: 10px;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--border-mid);
+    border-radius: var(--r);
+    padding: 1.25rem 1.3rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s, border-top-color 0.25s, border-color 0.25s, box-shadow 0.25s;
+  }
+  .stat-card:hover {
+    transform: translateY(-3px);
+    border-top-color: var(--gold);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+  }
+
+  .stat-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--cream-faint);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .stat-sub {
+    font-size: 11px;
+    color: var(--cream-faint);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* ── BODY TEXT ── */
+  .body-text {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--cream-dim);
+    margin-bottom: 1.4rem;
+    font-weight: 300;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-radius: var(--r);
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1.75rem;
+    background: var(--gold-pale);
+    border: 1px solid var(--border-strong);
+    position: relative;
+    overflow: hidden;
+  }
+  .callout::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+  }
+
+  .callout.rust {
+    background: rgba(196, 120, 85, 0.07);
+    border-color: rgba(196, 120, 85, 0.25);
+  }
+  .callout.rust::before { background: var(--rust-muted); }
+
+  .callout.teal {
+    background: rgba(90, 184, 165, 0.07);
+    border-color: rgba(90, 184, 165, 0.22);
+  }
+  .callout.teal::before { background: var(--teal-muted); }
+
+  .callout-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .callout.rust .callout-label { color: var(--rust-muted); }
+  .callout.teal .callout-label { color: var(--teal-muted); }
+
+  .callout p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--cream-dim);
+    font-weight: 300;
+  }
+
+  /* ── TWO COL ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 1.75rem;
+  }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .info-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.2rem 1.3rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .info-card h4 {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .info-card ul { padding-left: 0; list-style: none; }
+  .info-card li {
+    font-size: 13.5px;
+    color: var(--cream-dim);
+    margin-bottom: 6px;
+    line-height: 1.5;
+    font-weight: 300;
+    padding-left: 16px;
+    position: relative;
+  }
+  .info-card li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold-dim);
+    font-size: 11px;
+    top: 1px;
+  }
+
+  /* ── TABLES ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin-bottom: 1.75rem;
+    border-radius: var(--r);
+    border: 1px solid var(--border-mid);
+    box-shadow: var(--shadow-md);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card);
+    font-size: 13.5px;
+  }
+
+  thead th {
+    background: var(--bg-raise);
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 14px 16px;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border-strong);
+  }
+
+  tbody td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--cream-dim);
+    vertical-align: top;
+    line-height: 1.6;
+    font-weight: 300;
+    transition: background 0.15s;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: var(--bg-hover); }
+  tbody td:first-child { color: var(--cream); font-weight: 400; }
+
+  .td-name { font-weight: 500; color: var(--cream) !important; }
+  .td-sub {
+    font-size: 11px;
+    color: var(--cream-faint);
+    display: block;
+    margin-top: 3px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .badge.local    { background: var(--gold-pale); color: var(--gold-bright); border: 1px solid var(--border-gold); }
+  .badge.national { background: rgba(90,130,196,0.10); color: #8ab0e0; border: 1px solid rgba(90,130,196,0.28); }
+  .badge.global   { background: rgba(90,184,165,0.10); color: var(--teal-muted); border: 1px solid rgba(90,184,165,0.28); }
+  .badge.digital  { background: rgba(196,120,85,0.10); color: var(--rust-muted); border: 1px solid rgba(196,120,85,0.28); }
+
+  /* ── DIGITAL GRID ── */
+  .digital-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.75rem;
+  }
+
+  .digital-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--border-mid);
+    border-radius: var(--r);
+    padding: 1.1rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s, border-top-color 0.25s;
+  }
+  .digital-card:hover { transform: translateY(-3px); }
+
+  .digital-card .d-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--cream-dim);
+    margin-bottom: 10px;
+    line-height: 1.4;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .digital-card .d-rating {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 0.03em;
+  }
+  .digital-card .d-detail {
+    font-size: 11px;
+    color: var(--cream-faint);
+    line-height: 1.55;
+    font-weight: 300;
+  }
+  .digital-card.strong { border-top-color: var(--gold); }
+  .digital-card.strong .d-rating { color: var(--gold); }
+  .digital-card.moderate { border-top-color: #c49a5a; }
+  .digital-card.moderate .d-rating { color: #c49a5a; }
+  .digital-card.weak { border-top-color: #8a4a3a; }
+  .digital-card.weak .d-rating { color: #c4755a; }
+
+  /* ── OPP LIST ── */
+  .opp-list {
+    background: var(--bg-card);
+    border: 1px solid var(--border-mid);
+    border-radius: var(--r);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 1.75rem;
+  }
+
+  .opp-item {
+    display: flex;
+    gap: 18px;
+    padding: 1.3rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+    transition: background 0.2s;
+  }
+  .opp-item:last-child { border-bottom: none; }
+  .opp-item:hover { background: var(--bg-hover); }
+
+  .opp-num {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--r-sm);
+    background: var(--gold-pale);
+    border: 1px solid var(--border-gold);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .opp-body h5 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 4px;
+    letter-spacing: 0.01em;
+  }
+  .opp-body p {
+    font-size: 13px;
+    color: var(--cream-faint);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* ── CHAIN CARDS ── */
+  .chain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 1.75rem;
+  }
+  @media (max-width: 600px) { .chain-grid { grid-template-columns: 1fr; } }
+
+  .chain-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .chain-header {
+    padding: 0.8rem 1.25rem;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--border-mid);
+    color: var(--gold);
+    background: var(--bg-raise);
+  }
+
+  .chain-steps { list-style: none; }
+
+  .chain-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--cream-dim);
+    line-height: 1.55;
+    font-weight: 300;
+    transition: background 0.15s;
+  }
+  .chain-step:last-child { border-bottom: none; }
+  .chain-step:hover { background: var(--bg-hover); }
+
+  .chain-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  /* ── CONCLUSION ── */
+  .conclusion {
+    background: var(--bg-raise);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .conclusion::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,163,90,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .conclusion h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 1.25rem;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.01em;
+  }
+
+  .conclusion p {
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--cream-dim);
+    margin-bottom: 1.25rem;
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    font-weight: 300;
+  }
+
+  .conclusion-bullets {
+    list-style: none;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .conclusion-bullets li {
+    font-size: 13.5px;
+    color: var(--cream-dim);
+    margin-bottom: 10px;
+    padding-left: 22px;
+    position: relative;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  .conclusion-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 2.5rem 3rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--cream-faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .footer-note {
+    font-size: 11px;
+    color: var(--cream-ghost);
+    max-width: 420px;
+    text-align: right;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--cream-ghost); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    main { padding: 70px 1.25rem 3rem; }
+    .conclusion { padding: 2rem 1.5rem; }
+    footer { padding: 1.5rem 1.25rem 2rem; }
+    .footer-note { text-align: left; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    nav, body::before { display: none; }
+    main { padding: 1rem; }
+    .section { animation: none; opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#">Net Zero · Report</a>
+  <ul class="nav-links">
+    <li><a href="#global">Global</a></li>
+    <li><a href="#india">India</a></li>
+    <li><a href="#local">Pune</a></li>
+    <li><a href="#national">National</a></li>
+    <li><a href="#digital">Digital</a></li>
+    <li><a href="#opportunity">Opportunity</a></li>
+  </ul>
+  <span class="nav-tag">April 2026</span>
+</nav>
+
+<main>
+
+  <header class="hero">
+    <div class="hero-meta">
+      <span class="hero-tag">Industry Intelligence Report</span>
+      <span class="hero-date">Pune, Maharashtra · April 2026</span>
+    </div>
+    <h1>Waste Paper Recycling &amp;<br><em>Confidential Document Shredding</em><br>in India</h1>
+    <p class="hero-sub">A comprehensive market, competitor, and digital presence analysis for Net Zero — waste paper wholesaler and secure shredding specialist, Pune.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">Waste Paper Wholesale</span>
+      <span class="hero-pill">OCC &amp; Corrugated Boxes</span>
+      <span class="hero-pill">Old Newspapers</span>
+      <span class="hero-pill">Notebooks</span>
+      <span class="hero-pill">PET Bottles</span>
+      <span class="hero-pill">Confidential Shredding</span>
+    </div>
+  </header>
+
+  <!-- 01 GLOBAL -->
+  <section class="section" id="global">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Global Industry at a Glance</h2>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Waste Paper Recycling Market</div>
+        <div class="stat-value">$47.8B</div>
+        <div class="stat-sub">Global, 2024 — growing to $70.6B by 2032</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Document Shredding Market</div>
+        <div class="stat-value">$3.4B</div>
+        <div class="stat-sub">Global, 2024 — growing to $5.7B by 2033</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Waste Paper CAGR (Global)</div>
+        <div class="stat-value">5.0%</div>
+        <div class="stat-sub">Forecast period 2025–2032</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Shredding CAGR Asia-Pacific</div>
+        <div class="stat-value">6.1%</div>
+        <div class="stat-sub">Fastest-growing region 2024–2032</div>
+      </div>
+    </div>
+    <p class="body-text">The global waste paper recycling industry is on a solid growth path, driven by the e-commerce packaging boom, rising environmental consciousness, and government mandates to curb deforestation. Asia-Pacific — led by China, Japan, and India — holds the largest regional share, accounting for roughly 36% of total global processing volume. India holds approximately 2.1% of the global waste paper market and is consistently cited as one of the fastest-growing recovered paper economies globally.</p>
+    <p class="body-text">The document shredding sector is growing even faster than waste paper recycling, propelled by data privacy legislation, rising identity theft awareness, and the expansion of regulated industries like banking, healthcare, and law. Asia-Pacific is the fastest-growing region at 6.1% CAGR through 2032.</p>
+    <div class="callout">
+      <div class="callout-label">Key Macro Insight</div>
+      <p>India's packaging paper and paperboard consumption rose 8.2% in 2024, reaching 15 million tonnes — making India the world's fastest-growing paper economy. The e-commerce explosion means the supply of waste corrugated boxes, OCC, and paper scrap will continue to surge, directly benefiting wholesale collectors like Net Zero.</p>
+    </div>
+  </section>
+
+  <!-- 02 INDIA -->
+  <section class="section" id="india">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">The Indian Industry Context</h2>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">India Waste Management Market</div>
+        <div class="stat-value">$13.6B</div>
+        <div class="stat-sub">2025 — growing to $19.3B by 2030</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">India Paper Recycling CAGR</div>
+        <div class="stat-value">6.7%</div>
+        <div class="stat-sub">Projected 2026–2036</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Informal Sector Share</div>
+        <div class="stat-value">~70%</div>
+        <div class="stat-sub">Of first-mile waste collection in India</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">FDI in Paper Recycling</div>
+        <div class="stat-value">₹10,208Cr</div>
+        <div class="stat-sub">Cumulative FDI by June 2025</div>
+      </div>
+    </div>
+    <p class="body-text">India's waste paper recycling sector is undergoing a structural shift. The informal kabadiwala network historically dominated collection, but organized players are rapidly gaining ground through better pricing, technology, and compliance infrastructure. Maharashtra and Gujarat together hold the largest share of organized processing capacity nationally, with Pune and Mumbai as the principal industrial hubs. The top organized firms currently manage only 25–30% of total national throughput — a significant gap representing a major opportunity for organized players like Net Zero.</p>
+    <p class="body-text">On the shredding side, India is at a true inflection point. The Digital Personal Data Protection Act (DPDPA), 2023 — partially in force since November 13, 2025, and expected to be fully effective by May 2027 — is creating urgent compliance pressure across banks, hospitals, insurance companies, law firms, and government offices. Penalties for data breaches can reach ₹250 crore (~$30 million), making secure document disposal no longer optional for regulated entities.</p>
+    <div class="callout">
+      <div class="callout-label">Regulatory Tailwind — DPDPA 2023</div>
+      <p>India's DPDPA 2025 Rules mandate strict data retention limits, breach reporting, and secure disposal obligations. The exact sectors Net Zero targets — banks, hospitals, insurers, CAs, legal firms, government offices — are primary regulated entities, creating structurally growing demand for professional shredding over the next 2–3 years. Institutions that cannot demonstrate secure disposal risk penalties up to ₹250 crore.</p>
+    </div>
+    <div class="two-col">
+      <div class="info-card">
+        <h4>Major Paper Mills Buying Waste Paper</h4>
+        <ul>
+          <li>JK Paper, ITC Paper, BILT</li>
+          <li>Century Paper &amp; Boards</li>
+          <li>Satia Industries</li>
+          <li>Seshasayee Paper &amp; Boards</li>
+          <li>Tamil Nadu Newsprint &amp; Papers</li>
+          <li>Sirpur Paper Mills</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>Primary Materials in India's Waste Paper Supply</h4>
+        <ul>
+          <li>OCC (Old Corrugated Cartons) — highest volume</li>
+          <li>Old Newspapers (ONP)</li>
+          <li>Office white cutting &amp; notebooks</li>
+          <li>Mixed waste paper &amp; duplex</li>
+          <li>PET / plastic bottles (separate stream)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 PUNE -->
+  <section class="section" id="local">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Local Competitors — Pune</h2>
+    </div>
+    <p class="body-text">Pune's waste paper and shredding market is fragmented, with dozens of small unorganized traders operating across Market Yard, Hadapsar, Bhosari MIDC, Pimpri-Chinchwad, and Alandi Road. On the shredding side, only a handful of semi-organized players exist.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Segment</th>
+            <th>Type</th>
+            <th>Strengths</th>
+            <th>Weakness vs Net Zero</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-name">Shredders India</span><span class="td-sub">Warje, Pune — Est. 2015</span></td>
+            <td>Shredding</td>
+            <td><span class="badge local">Local</span></td>
+            <td>Dedicated shredding brand, 13 yrs on IndiaMART, 91% response rate, on-site &amp; off-site, certificate of destruction</td>
+            <td>Primarily a shredding machine seller; limited chain-of-custody protocol; no locked vehicle or live camera model</td>
+          </tr>
+          <tr>
+            <td><span class="td-name">Shredders Pune</span><span class="td-sub">shredderspune.com</span></td>
+            <td>Shredding</td>
+            <td><span class="badge local">Local</span></td>
+            <td>Dedicated Pune shredding brand, door-to-door service, professional website</td>
+            <td>No disclosed locked vehicle, camera access, or witness-shredding protocol; smaller operation</td>
+          </tr>
+          <tr>
+            <td><span class="td-name">SSS Facility Services</span><span class="td-sub">Hadapsar, Pune — 9 yrs</span></td>
+            <td>Shredding</td>
+            <td><span class="badge local">Local</span></td>
+            <td>Listed on IndiaMART, 9 years in business</td>
+            <td>Very low response rate (8%), poor rating (3.1/5), mostly a generalist facility services firm</td>
+          </tr>
+          <tr>
+            <td><span class="td-name">Scrapdeal</span><span class="td-sub">Sinhgad Road, Vadgaon Khurd</span></td>
+            <td>Waste paper + mixed scrap + basic shredding</td>
+            <td><span class="badge digital">Digital-First</span></td>
+            <td>App-based platform, transparent pricing, ₹2Cr business, media-featured (Hindustan Times, The Better India), 90% repeat users, ~200 workers</td>
+            <td>Shredding is a secondary no-cost add-on — not a secure specialty; targets residential &amp; SME, not large B2B institutions; zero chain-of-custody protocol</td>
+          </tr>
+          <tr>
+            <td><span class="td-name">Roshani Scrap Center</span><span class="td-sub">Pune — 5 yrs</span></td>
+            <td>Waste paper scrap</td>
+            <td><span class="badge local">Local</span></td>
+            <td>GST verified, 79% IndiaMART response rate, OCC pricing at ₹8/kg</td>
+            <td>Small dealer, no shredding, no baling capacity, no institutional sales</td>
+          </tr>
+          <tr>
+            <td><span class="td-name">Fibro Papers</span><span class="td-sub">Pimpri-Chinchwad, Pune — 9 yrs</span></td>
+            <td>Waste paper</td>
+            <td><span class="badge local">Local</span></td>
+            <td>GST verified, 9 years, LCC pricing at ₹20/kg</td>
+            <td>Paper dealer only, no shredding, no B2B institutional services</td>
+          </tr>
+          <tr>
+            <td><span class="td-name">Odhavji Dharamsi Thakkar &amp; Co.</span><span class="td-sub">Market Yard, Pune</span></td>
+            <td>Waste paper wholesale</td>
+            <td><span class="badge local">Local</span></td>
+            <td>Long-standing Market Yard presence, established mill relationships</td>
+            <td>Traditional kabadiwala model, no digital presence, no institutional shredding services</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout teal">
+      <div class="callout-label">Net Zero's Local Competitive Position</div>
+      <p>No single Pune competitor currently combines waste paper wholesale (with baling) + PET bottle dealing + institutional secure shredding with locked vehicles, real-time camera access, and a formal certificate of destruction. Net Zero occupies a genuinely distinct niche. Scrapdeal is the most digitally advanced local player but serves a completely different customer segment.</p>
+    </div>
+  </section>
+
+  <!-- 04 NATIONAL -->
+  <section class="section" id="national">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">National-Level Competitors — India</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>HQ</th>
+            <th>Type</th>
+            <th>Scale &amp; Positioning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-name">Iron Mountain India</span></td>
+            <td>Mumbai (US parent)</td>
+            <td><span class="badge global">Global MNC</span></td>
+            <td>Largest organized player in India for records management + secure shredding. Targets large enterprises, BFSI, healthcare. Premium priced, long-term contracts. Provides certificate of destruction. Limited Pune SME penetration — but a long-term threat for Net Zero's largest institutional clients.</td>
+          </tr>
+          <tr>
+            <td><span class="td-name">Neem Enviro</span></td>
+            <td>Mumbai</td>
+            <td><span class="badge national">National</span></td>
+            <td>11 years, IndiaMART TrustSEAL, 4.2 rating (56 reviews), 78% response rate, ₹6/kg. Strong Mumbai/MMR presence. One of the best-reviewed mid-tier shredding services nationally.</td>
+          </tr>
+          <tr>
+            <td><span class="td-name">EssJay Infosystem Pvt. Ltd.</span></td>
+            <td>Mumbai (Kurla)</td>
+            <td><span class="badge national">National</span></td>
+            <td>23 years, IndiaMART TrustSEAL, 4.2 rating (24 reviews), 93% response rate, ₹2,000/day. Bundles document scanning, shredding, and printing. Strong long-term B2B credibility.</td>
+          </tr>
+          <tr>
+            <td><span class="td-name">Shredx</span></td>
+            <td>New Delhi</td>
+            <td><span class="badge national">National</span></td>
+            <td>13 years, 4.5 rating (12 reviews), ₹10/kg. Well-known national brand for custom shredding. North India focused with cross-regional ambitions.</td>
+          </tr>
+          <tr>
+            <td><span class="td-name">Starbic Business Solutions</span></td>
+            <td>Gurugram</td>
+            <td><span class="badge national">National</span></td>
+            <td>Serves Fortune 500, banks, law firms. Premium document management + shredding. Strong B2B sales. North India centric with limited Maharashtra presence.</td>
+          </tr>
+          <tr>
+            <td><span class="td-name">Aaditya Enterprises</span></td>
+            <td>Chennai</td>
+            <td><span class="badge national">National</span></td>
+            <td>12 years, IndiaMART TrustSEAL, 4.5 rating (4 reviews), 94% response rate. Customized shredding solutions. South India focus. Strong sustainability positioning.</td>
+          </tr>
+          <tr>
+            <td><span class="td-name">Greenobin Recycling</span></td>
+            <td>Gurugram</td>
+            <td><span class="badge national">National</span></td>
+            <td>15 years, 5-star rating, ₹5/kg — waste paper + shredding combination. Growing national footprint with strong credibility signals on trade platforms.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout rust">
+      <div class="callout-label">Threat Assessment</div>
+      <p>Iron Mountain India is the only credible near-term threat at the large enterprise level, competing on brand and compliance more than price — making it a different category entirely. The national mid-tier players have not yet aggressively entered Pune's institutional shredding market. Net Zero has a geographic and relationship advantage that should be actively deepened before these players scale their regional reach.</p>
+    </div>
+  </section>
+
+  <!-- 05 DIGITAL -->
+  <section class="section" id="digital">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Digital Presence Analysis</h2>
+    </div>
+    <p class="body-text">The Indian shredding and waste paper sector has very low digital maturity overall. Most operators rely on word-of-mouth, IndiaMART listings, and Justdial. Here's a comparative assessment across key players:</p>
+    <div class="digital-grid">
+      <div class="digital-card strong">
+        <div class="d-name">Scrapdeal (Pune)</div>
+        <div class="d-rating">Strong</div>
+        <div class="d-detail">App, active Facebook, media features in HT &amp; The Better India, Google Play listing — best digital presence in Pune</div>
+      </div>
+      <div class="digital-card strong">
+        <div class="d-name">Iron Mountain India</div>
+        <div class="d-rating">Very Strong</div>
+        <div class="d-detail">Dedicated Indian site, LinkedIn, national ad spend, content marketing, direct sales force</div>
+      </div>
+      <div class="digital-card moderate">
+        <div class="d-name">Shredders Pune</div>
+        <div class="d-rating">Moderate</div>
+        <div class="d-detail">SEO-optimised website, ranks for "shredding Pune"; limited social media, no IndiaMART</div>
+      </div>
+      <div class="digital-card moderate">
+        <div class="d-name">Shredders India</div>
+        <div class="d-rating">Moderate</div>
+        <div class="d-detail">IndiaMART listing, basic website, 14 reviews, 91% response rate — decent trade presence</div>
+      </div>
+      <div class="digital-card moderate">
+        <div class="d-name">Neem Enviro (Mumbai)</div>
+        <div class="d-rating">Moderate+</div>
+        <div class="d-detail">IndiaMART TrustSEAL, 56 reviews, 78% response rate — best IndiaMART credibility nationally</div>
+      </div>
+      <div class="digital-card weak">
+        <div class="d-name">Pune scrap dealers (most)</div>
+        <div class="d-rating">Very Weak</div>
+        <div class="d-detail">Only IndiaMart / Justdial listings, no website, no social media — invisible online</div>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Digital Opportunity for Net Zero</div>
+      <p>Net Zero currently has no visible digital footprint in public sources. The competitive landscape in Pune is almost entirely offline. Even a modest investment in a professional website, Google Business Profile, and LinkedIn page would immediately distinguish Net Zero from 95% of local competitors and begin capturing institutional B2B leads searching online — a cohort growing rapidly as DPDPA compliance becomes urgent.</p>
+    </div>
+  </section>
+
+  <!-- 06 CHAIN -->
+  <section class="section" id="chain">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">How the Industry Works — Full Chain View</h2>
+    </div>
+    <div class="chain-grid">
+      <div class="chain-card">
+        <div class="chain-header">Waste Paper Recycling Chain</div>
+        <ul class="chain-steps">
+          <li class="chain-step"><span class="chain-dot"></span>Kabadiwalas &amp; collectors buy from households, offices, factories</li>
+          <li class="chain-step"><span class="chain-dot"></span>Wholesalers like Net Zero buy from scrap shops, sort, and bale</li>
+          <li class="chain-step"><span class="chain-dot"></span>Baled material sold to paper mills by grade (OCC, ONP, white cutting)</li>
+          <li class="chain-step"><span class="chain-dot"></span>Mills pulp the waste paper, produce recycled kraft, newsprint, board</li>
+          <li class="chain-step"><span class="chain-dot"></span>Pricing driven by mill demand, monsoon supply dips, import prices</li>
+        </ul>
+      </div>
+      <div class="chain-card">
+        <div class="chain-header">Secure Shredding Chain</div>
+        <ul class="chain-steps">
+          <li class="chain-step"><span class="chain-dot"></span>Institution calls; site visit for material volume assessment</li>
+          <li class="chain-step"><span class="chain-dot"></span>Locked vehicle collects material securely from client premises</li>
+          <li class="chain-step"><span class="chain-dot"></span>Client supervises shredding live or locks material with camera access</li>
+          <li class="chain-step"><span class="chain-dot"></span>Industrial shredder destroys documents completely</li>
+          <li class="chain-step"><span class="chain-dot"></span>Certificate of destruction issued; shredded paper recycled to mills</li>
+          <li class="chain-step"><span class="chain-dot"></span>Client is paid for shredded material — reducing their cost barrier</li>
+        </ul>
+      </div>
+    </div>
+    <p class="body-text">The unique double-revenue model of shredding is what makes it attractive: the shredding firm charges the client for the security service and also recovers the shredded paper to resell to mills. Net Zero's promise to pay the client for the shredded material — rather than just charging for the service — is a meaningful differentiator that lowers the barrier for institutions to try and retain the service.</p>
+    <div class="callout">
+      <div class="callout-label">Industry Challenge to Watch</div>
+      <p>India's paper recycling market faces price volatility due to global paper trade cycles, import restrictions, and monsoon-driven supply swings. The DPDPA is actively creating new demand for destruction of legacy paper records built up over decades, likely sustaining shredding growth through at least 2030.</p>
+    </div>
+  </section>
+
+  <!-- 07 OPPORTUNITY -->
+  <section class="section" id="opportunity">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2 class="section-title">Strategic Growth Opportunities for Net Zero</h2>
+    </div>
+    <div class="opp-list">
+      <div class="opp-item">
+        <div class="opp-num">01</div>
+        <div class="opp-body">
+          <h5>Build a digital presence — immediately</h5>
+          <p>A professional website + Google Business Profile + LinkedIn page is the single highest-ROI investment. Searching "document shredding Pune" or "waste paper dealer Pune" returns sparse, outdated results. Even basic SEO would drive inbound institutional B2B leads with virtually zero competition.</p>
+        </div>
+      </div>
+      <div class="opp-item">
+        <div class="opp-num">02</div>
+        <div class="opp-body">
+          <h5>Position explicitly as a DPDPA-compliant shredding partner</h5>
+          <p>Actively market to banks, hospitals, insurance firms, CAs, and law firms as a DPDPA-compliant destruction partner. Net Zero's chain-of-custody model — locked vehicle, witness shredding, camera access, certificate of destruction — maps directly onto what these entities need to demonstrate regulatory compliance.</p>
+        </div>
+      </div>
+      <div class="opp-item">
+        <div class="opp-num">03</div>
+        <div class="opp-body">
+          <h5>Shift to annual shredding contracts with institutions</h5>
+          <p>Moving from one-time transactions to quarterly or annual contracts with hospitals, banks, and insurance companies creates recurring, predictable revenue and builds defensible client relationships that are hard for competitors to displace.</p>
+        </div>
+      </div>
+      <div class="opp-item">
+        <div class="opp-num">04</div>
+        <div class="opp-body">
+          <h5>Target distributor warehouses in Pune's industrial zones</h5>
+          <p>Pune's industrial clusters — Bhosari MIDC, Chakan, Ranjangaon — house large FMCG, pharmaceutical, and logistics warehouses generating significant OCC and corrugated waste. Tie-ups here provide a steady, high-volume wholesale feed for the baling unit.</p>
+        </div>
+      </div>
+      <div class="opp-item">
+        <div class="opp-num">05</div>
+        <div class="opp-body">
+          <h5>Bundle hard-drive + document shredding for IT companies</h5>
+          <p>Pune's IT corridor (Hinjewadi, Kharadi, Magarpatta) is a high-potential target for bundled data destruction services — combining physical document shredding with hard-drive/SSD destruction. A fast-growing niche with minimal organized competition in Pune.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCLUSION -->
+  <section class="section">
+    <div class="conclusion">
+      <h3>Summary Verdict</h3>
+      <p>Net Zero operates at the intersection of two structurally growing markets in a city where organized competition is almost nonexistent. The waste paper recycling side benefits directly from India's paper demand boom and the e-commerce packaging wave. The shredding side is entering a multi-year compliance-driven growth cycle powered by the DPDPA — a law that targets exactly the institutional clients Net Zero already serves.</p>
+      <p>The key strategic gap — and the most actionable near-term priority — is digital presence. Net Zero's service model (locked vehicles, camera access, witness shredding, certificate of destruction, paying the client) is genuinely differentiated and security-superior to most Pune competitors and many national ones. The story just needs to be told online.</p>
+      <ul class="conclusion-bullets">
+        <li>Build a website and Google Business Profile immediately — online competition for this market in Pune is nearly zero</li>
+        <li>Acquire DPDPA-compliant messaging and position shredding as a regulatory necessity, not a convenience</li>
+        <li>Target banks, hospitals, and universities in Pune with direct business development — high-volume, recurring clients</li>
+        <li>Explore PCMC and PMC institutional tie-ups for waste paper collection — stable, large-volume supply sources</li>
+        <li>Consider obtaining an i-SIGMA / NAID equivalent certification to match Iron Mountain's compliance credibility</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-brand">Net Zero · Pune</div>
+  <p class="footer-note">Industry Intelligence Report · Compiled April 2026 · Sources: Mordor Intelligence, Future Market Insights, IMARC Group, IndiaMART, Cognitive Market Research, EY India, Hogan Lovells, Bureau of International Recycling, trade portals and public company profiles.</p>
+</footer>
+
+</body>
+</html>
